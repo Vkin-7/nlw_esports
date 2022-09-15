@@ -1,7 +1,31 @@
-import { MagnifyingGlassPlus } from 'phosphor-react';
+import { useEffect, useState } from 'react';
 import logoImg from './assets/logo_nlw.svg';
+import { AdForm } from './components/AdForm';
+
+import { CreateAdBanner } from './components/CreateAdBanner';
+import { GameBanner } from './components/GameBanner';
+import { Modal } from './components/Modal';
+
+interface Game {
+  id: string;
+  title: string;
+  bannerUrl: string;
+  _count: {
+    ads: number;
+  }
+}
 
 function App() {
+  const [games, setGames] = useState<Game[]>([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3333/games')
+      .then(res => res.json())
+      .then(data => {
+        setGames(data);
+      });
+
+  }, []);
   return (
     <div className="max-w-[1344px] mx-auto flex flex-col items-center my-20">
       <img src={logoImg} alt="" />
@@ -11,68 +35,18 @@ function App() {
       </h1>
 
       <div className='grid grid-cols-6 gap-6 mt-16'>
-        <a href='#' className='relative rounded-lg overflow-hidden'>
-          <img src='/game_1.png' alt='' />
-
-          <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
-            <strong className='font-bold text-white block'>Game title</strong>
-            <span className='text-zinc-300 text-sm block'>4 anúncios</span>
-          </div>
-        </a>
-        <a href='#' className='relative rounded-lg overflow-hidden'>
-          <img src='/game_2.png' alt='' />
-
-          <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
-            <strong className='font-bold text-white block'>Game title</strong>
-            <span className='text-zinc-300 text-sm block'>4 anúncios</span>
-          </div>
-        </a>
-        <a href='#' className='relative rounded-lg overflow-hidden'>
-          <img src='/game_3.png' alt='' />
-
-          <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
-            <strong className='font-bold text-white block'>Game title</strong>
-            <span className='text-zinc-300 text-sm block'>4 anúncios</span>
-          </div>
-        </a>
-        <a href='#' className='relative rounded-lg overflow-hidden'>
-          <img src='/game_4.png' alt='' />
-
-          <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
-            <strong className='font-bold text-white block'>Game title</strong>
-            <span className='text-zinc-300 text-sm block'>4 anúncios</span>
-          </div>
-        </a>
-        <a href='#' className='relative rounded-lg overflow-hidden'>
-          <img src='/game_5.png' alt='' />
-
-          <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
-            <strong className='font-bold text-white block'>Game title</strong>
-            <span className='text-zinc-300 text-sm block'>4 anúncios</span>
-          </div>
-        </a>
-        <a href='#' className='relative rounded-lg overflow-hidden'>
-          <img src='/game_6.png' alt='' />
-
-          <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
-            <strong className='font-bold text-white block'>Game title</strong>
-            <span className='text-zinc-300 text-sm block'>4 anúncios</span>
-          </div>
-        </a>
+        {games.map(game => 
+          <GameBanner 
+            key={game.id} 
+            title={game.title} 
+            bannerUrl={game.bannerUrl} 
+            adsCount={game._count.ads} />
+        )}
       </div>
 
-      <div className="bg-[#2A2634] self-stretch rounded-lg mt-8 px-8 py-6 flex justify-between items-center relative overflow-hidden before:content-[''] before:absolute before:left-0 before:right-0 before:top-0 before:w-full before:bg-nlw-gradient before:h-1">
-        <div>
-          <strong className='text-2xl text-white font-black block'>Não encontrou o seu duo?</strong>
-          <span className='text-zinc-400 block'>Publique um anúncio para encontrar novos players!</span>
-        </div>
-
-        <button className='py-3 px-4 bg-violet-500 text-white rounded hover:bg-violet-600 flex items-center gap-3'>
-          <MagnifyingGlassPlus size={24} />
-          Publicar anúncio
-        </button>
-
-      </div>
+      <Modal title='Publique um anúncio' content={<AdForm />}>
+        <CreateAdBanner />
+      </Modal>
     </div>
   )
 }
