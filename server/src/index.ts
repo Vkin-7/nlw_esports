@@ -5,9 +5,7 @@ import { convertHoursStringToMinutes, convertMinutesToHourString } from './utils
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin: process.env.ORIGIN_DOMAIN || ''
-}));
+app.use(cors());
 
 const prismaClient = new PrismaClient();
 
