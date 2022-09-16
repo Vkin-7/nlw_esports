@@ -5,6 +5,13 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
     },
+    scroll: {
+        width: '100%',
+    },
+    scrollContent: {
+        alignItems: 'center',
+        paddingBottom: 20,
+    },
     logo: {
         width: 214,
         height: 120,
