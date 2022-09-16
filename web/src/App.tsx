@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import logoImg from './assets/logo_nlw.svg';
 import { AdForm } from './components/AdForm';
 
 import { CreateAdBanner } from './components/CreateAdBanner';
 import { GameBanner } from './components/GameBanner';
 import { Modal } from './components/Modal';
+import { Slider } from './components/Slider';
 
 interface Game {
   id: string;
@@ -19,10 +21,9 @@ function App() {
   const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3333/games')
-      .then(res => res.json())
-      .then(data => {
-        setGames(data);
+    axios('http://localhost:3333/games')
+      .then(res => {
+        setGames(res.data);
       });
 
   }, []);
@@ -35,14 +36,18 @@ function App() {
       </h1>
 
       <div className='grid grid-cols-6 gap-6 mt-16'>
-        {games.map(game => 
-          <GameBanner 
-            key={game.id} 
-            title={game.title} 
-            bannerUrl={game.bannerUrl} 
-            adsCount={game._count.ads} />
-        )}
+
       </div>
+
+      <Slider>
+        {games.map(game => 
+            <GameBanner 
+              key={game.id} 
+              title={game.title} 
+              bannerUrl={game.bannerUrl} 
+              adsCount={game._count.ads} />
+          )}
+      </Slider>
 
       <Modal title='Publique um anúncio' content={<AdForm />}>
         <CreateAdBanner />
