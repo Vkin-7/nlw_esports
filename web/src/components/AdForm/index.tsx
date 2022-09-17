@@ -3,8 +3,8 @@ import { Check, GameController } from "phosphor-react";
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 
-import { Input } from './Form/Input';
-import { Select } from './Form/Select';
+import { Input } from '../Form/Input';
+import { Select } from '../Form/Select';
 import { FormEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -84,11 +84,10 @@ export function AdForm() {
               <Input id="discord" name="discord" type="text" placeholder='Usuario#0000' required />
             </div>
           </div>
-    
-          <div className='flex gap-6'>
-            <div className='flex flex-col gap-2'>
+
+          <div className='flex flex-col gap-2'>
               <label htmlFor="weekDays">Quando costuma jogar?</label>
-              <ToggleGroup.Root type='multiple' className="grid grid-cols-4 gap-2" value={weekDays} onValueChange={setWeekDays}>
+              <ToggleGroup.Root type='multiple' className="flex flex-row gap-2" value={weekDays} onValueChange={setWeekDays}>
                 <ToggleGroup.Item value="0" title="Domingo" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('0') && 'bg-violet-500'} `}>D</ToggleGroup.Item>
                 <ToggleGroup.Item value="1" title="Segunda" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('1') && 'bg-violet-500'} `}>S</ToggleGroup.Item>
                 <ToggleGroup.Item value="2" title="Terça" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('2') && 'bg-violet-500'} `}>T</ToggleGroup.Item>
@@ -99,13 +98,12 @@ export function AdForm() {
               </ToggleGroup.Root>
             </div>
     
-            <div className='flex flex-col gap-2 flex-1'>
+          <div className='flex flex-col gap-2'>
               <label htmlFor="hourStart">Qual o horário do dia?</label>
-              <div className='grid grid-cols-2 gap-2'>
+              <div className='grid grid-cols-2 gap-6'>
                 <Input id="hourStart" name="hourStart" type="time" placeholder='De' required />
                 <Input id="hourEnd" name="hourEnd" type="time" placeholder='Até' required />
               </div>
-            </div>
           </div>
 
           <label className='mt-2 flex items-center gap-2 text-sm'>

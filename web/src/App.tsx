@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { SwiperSlide } from 'swiper/react';
+
 import logoImg from './assets/logo_nlw.svg';
 import { AdForm } from './components/AdForm';
 
@@ -41,11 +43,14 @@ function App() {
 
       <Slider>
         {games.map(game => 
-            <GameBanner 
-              key={game.id} 
-              title={game.title} 
-              bannerUrl={game.bannerUrl} 
-              adsCount={game._count.ads} />
+            (
+              <SwiperSlide key={game.id} >
+                <GameBanner 
+                  title={game.title} 
+                  bannerUrl={game.bannerUrl} 
+                  adsCount={game._count.ads} />
+              </SwiperSlide>
+            )
           )}
       </Slider>
 
