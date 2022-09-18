@@ -20,7 +20,7 @@ export function AdForm() {
   const [useVoiceChannel, setUseVoiceChannel] = useState<boolean>(false);
 
   useEffect(() => {
-    axios('http://localhost:3333/games')
+    axios('http://192.168.0.110:3333/games')
       .then(res => {
         setGames(res.data);
       });
@@ -46,7 +46,7 @@ export function AdForm() {
     };
 
     try {
-      const result = await axios.post(`http://localhost:3333/game/${gameId}/ads`, data);
+      const result = await axios.post(`http://192.168.0.110:3333/game/${gameId}/ads`, data);
 
       if(result.status === 201)
         alert('Anúncio criado com sucesso!');
@@ -88,20 +88,20 @@ export function AdForm() {
           <div className='flex flex-col gap-2'>
               <label htmlFor="weekDays">Quando costuma jogar?</label>
               <ToggleGroup.Root type='multiple' className="flex flex-row gap-2" value={weekDays} onValueChange={setWeekDays}>
-                <ToggleGroup.Item value="0" title="Domingo" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('0') && 'bg-violet-500'} `}>D</ToggleGroup.Item>
-                <ToggleGroup.Item value="1" title="Segunda" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('1') && 'bg-violet-500'} `}>S</ToggleGroup.Item>
-                <ToggleGroup.Item value="2" title="Terça" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('2') && 'bg-violet-500'} `}>T</ToggleGroup.Item>
-                <ToggleGroup.Item value="3" title="Quarta" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('3') && 'bg-violet-500'} `}>Q</ToggleGroup.Item>
-                <ToggleGroup.Item value="4" title="Quinta" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('4') && 'bg-violet-500'} `}>Q</ToggleGroup.Item>
-                <ToggleGroup.Item value="5" title="Sexta" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('5') && 'bg-violet-500'} `}>S</ToggleGroup.Item>
-                <ToggleGroup.Item value="6" title="Sábado" className={`w-8 h-8 rounded bg-zinc-900 ${weekDays.includes('6') && 'bg-violet-500'} `}>S</ToggleGroup.Item>
+                <ToggleGroup.Item value="0" title="Domingo" className={`w-8 h-8 rounded ${weekDays.includes('0') ? 'bg-violet-500' : 'bg-zinc-900'} `}>D</ToggleGroup.Item>
+                <ToggleGroup.Item value="1" title="Segunda" className={`w-8 h-8 rounded ${weekDays.includes('1') ? 'bg-violet-500' : 'bg-zinc-900'} `}>S</ToggleGroup.Item>
+                <ToggleGroup.Item value="2" title="Terça" className={`w-8 h-8 rounded ${weekDays.includes('2') ? 'bg-violet-500' : 'bg-zinc-900'} `}>T</ToggleGroup.Item>
+                <ToggleGroup.Item value="3" title="Quarta" className={`w-8 h-8 rounded ${weekDays.includes('3') ? 'bg-violet-500' : 'bg-zinc-900'} `}>Q</ToggleGroup.Item>
+                <ToggleGroup.Item value="4" title="Quinta" className={`w-8 h-8 rounded ${weekDays.includes('4') ? 'bg-violet-500' : 'bg-zinc-900'} `}>Q</ToggleGroup.Item>
+                <ToggleGroup.Item value="5" title="Sexta" className={`w-8 h-8 rounded ${weekDays.includes('5') ? 'bg-violet-500' : 'bg-zinc-900'} `}>S</ToggleGroup.Item>
+                <ToggleGroup.Item value="6" title="Sábado" className={`w-8 h-8 rounded ${weekDays.includes('6') ? 'bg-violet-500' : 'bg-zinc-900'} `}>S</ToggleGroup.Item>
               </ToggleGroup.Root>
             </div>
     
           <div className='flex flex-col gap-2'>
               <label htmlFor="hourStart">Qual o horário do dia?</label>
               <div className='grid grid-cols-2 gap-6'>
-                <Input id="hourStart" name="hourStart" type="time" placeholder='De' required />
+                <Input id="hourStart" name="hourStart" type="time" placeholder='De' required className='w-[100%]' />
                 <Input id="hourEnd" name="hourEnd" type="time" placeholder='Até' required />
               </div>
           </div>
