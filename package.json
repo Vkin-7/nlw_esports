@@ -4,7 +4,7 @@
   "description": "This project was made exclusively for study reasons.",
   "main": "index.js",
   "scripts": {
-    "install-all": "cd mobile && npx expo install  && cd ../server && nmp i && cd ../web && npm i"
+    "install-all": "cd mobile && npx expo install  && cd ../server && npm i && cd ../web && npm i"
   },
   "repository": {
     "type": "git",
