@@ -54,7 +54,7 @@ Index             |  Create ad
 
 ### Mobile
 Home Screen                |  Game Screen                  |  Discord Modal
-:-------------------------:|:-------------------------:|:--------------------
+:-------------------------:|:-------------------------:|:--------------------:
 ![](./read_me_files/home_mobile.png)  |  ![](./read_me_files/game_mobile.png) | ![](./read_me_files/discord_mobile.png)
 ### 🚀 Technologies used:
 - TypeScript <img align="center" alt="Vkin-Ts" height="15" width="15" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />
